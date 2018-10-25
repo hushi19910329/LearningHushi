@@ -1,0 +1,84 @@
+<div class="article fmt article__content" data-id="1190000009076881" data-license="">
+
+<h1 id="articleHeader0">连接远程jupyter notebook ----windows环境</h1>
+<p>jupyter notebook作为一个小巧的，使用方便的python编辑器，受到许多初学者的喜爱；考虑到本地配置的限制，往往想要调用远程服务器中的jupyter notebook，下文记录下查阅网上资料尝试的步骤：</p>
+<h2 id="articleHeader1">1. 远程服务器中jupyter 安装</h2>
+<p>本文使用的远程服务器是centos7，redhat系；首先，你的服务器中需要安装python，pip，此处不赘述；由于本人实际上需要使用Tensorflow，所以会先安装Tensorflow，具体安装步骤步骤可以网上资料；</p>
+<p>安装jupyter:</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="pip install jupyter notebook" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs mipsasm"><code class="shell" style="word-break: break-word; white-space: initial;">pip <span class="hljs-keyword">install </span><span class="hljs-keyword">jupyter </span>notebook</code></pre>
+<h2 id="articleHeader2">2. 服务器端的设置</h2>
+<ul><li><p>启动ipython</p></li></ul>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="$ ipython" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs elixir"><code style="word-break: break-word; white-space: initial;"><span class="hljs-variable">$ </span>ipython</code></pre>
+<ul><li><p>创建密码</p></li></ul>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [1]: from notebook.auth import passwd; passwd()
+需要设置两次密码，
+比如'sha1:-----------------------'，复制该字符串，之后需要用到" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs actionscript"><code>In [<span class="hljs-number">1</span>]: from notebook.auth <span class="hljs-meta"><span class="hljs-meta-keyword">import</span> passwd;</span> passwd()
+需要设置两次密码，
+比如<span class="hljs-string">'sha1:-----------------------'</span>，复制该字符串，之后需要用到</code></pre>
+<ul><li><p>生成jupyter的配置文件</p></li></ul>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="$ jupyter notebook --generate-config
+#将会在home目录下生成一个隐藏文件夹.jupyter，该文件夹中有一个jupyter的配置文件；" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs verilog"><code>$ jupyter notebook --<span class="hljs-keyword">generate</span>-<span class="hljs-keyword">config</span>
+#将会在home目录下生成一个隐藏文件夹<span class="hljs-variable">.jupyter</span>，该文件夹中有一个jupyter的配置文件；</code></pre>
+<ul><li><p>打开配置文件,如果不存在即是创建</p></li></ul>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="$ vi ~/.jupyter/jupyter_notebook_config.py" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs elixir"><code style="word-break: break-word; white-space: initial;"><span class="hljs-variable">$ </span>vi ~<span class="hljs-regexp">/.jupyter/jupyter</span>_notebook_config.py</code></pre>
+<p>将以下信息进行修改</p>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="c.NotebookApp.ip = '*'
+c.NotebookApp.password = u' sha1:-----' #这里就是上面的字符串
+c.NotebookApp.port = 8000   # 这里的端口可以自己定义，是之后连接的时候需要设定的
+" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs awk"><code>c.NotebookApp.ip = <span class="hljs-string">'*'</span>
+c.NotebookApp.password = <span class="hljs-string">u' sha1:-----'</span> <span class="hljs-comment">#这里就是上面的字符串</span>
+c.NotebookApp.port = <span class="hljs-number">8000</span>   <span class="hljs-comment"># 这里的端口可以自己定义，是之后连接的时候需要设定的</span>
+</code></pre>
+<h2 id="articleHeader3">3. windows客户端设置</h2>
+<p>如果你是linux本地机，那么就可以通过ssh访问远程服务器，在命令行中启动jupyter notebook，<br>输入localhost:8000(这里的端口号与你设置的有关)，但如果在windows下：</p>
+<ul><li><p>通过ssh或者xshell等工具访问远程服务器，在你的会话中进行设置，比如xshell中，选择属性-ssh-隧道,点击添加</p></li></ul>
+<p><span class="img-wrap"><img data-src="https://segmentfault.com/img/bVMfst?w=393&amp;h=270" src="https://segmentfault.com/img/bVMfst?w=393&amp;h=270" alt="clipboard.png" title="clipboard.png" style="cursor: pointer; display: inline;"></span></p>
+<p>侦听端口填写刚才的8000，目标端口默认是8888；</p>
+<ul><li><p>设置完成后，在ssh或者xshell的命令行中输入</p></li></ul>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="jupyter notebook" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs ebnf"><code style="word-break: break-word; white-space: initial;"><span class="hljs-attribute">jupyter notebook</span></code></pre>
+<ul><li><p>此刻，在windows本地中输入<a>localhost:8000</a>就可以访问远程服务器上的jupyter了；<br>会出现设置密码的界面，如果不记得密码，可直接复制命令行界面中输出的token后面的字符串(红</p></li></ul>
+<p>划掉的部分<span class="img-wrap"><img data-src="https://segmentfault.com/img/bVMfta?w=742&amp;h=39" src="https://segmentfault.com/img/bVMfta?w=742&amp;h=39" alt="clipboard.png" title="clipboard.png" style="cursor: pointer; display: inline;"></span><br>...]</p>
+
+                </div>

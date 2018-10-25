@@ -1,0 +1,478 @@
+<div class="col-xs-12 col-md-9 main ">
+
+                                <div class="post-topheader custom- pt0">
+                    <div class="mb20">
+                        <div class="block-for-right-border">
+                            <div class="row">
+                                <div class="col-md-12article__author col-sm-12 col-xs-12">
+
+
+                                    <div class="post-topheader__info" data-username="l1xnan" data-userslug="l1xnan" data-useravatar="https://avatar-static.segmentfault.com/406/536/4065361842-54dd7aed39d1d_big64">
+
+                                        <div>
+
+
+                                        </div>
+
+                                        <h1 class="h1 post-topheader__info--title" id="articleTitle" data-id="1190000010758722">
+                                            <a href="/a/1190000010758722"> Jupyter 魔术命令（magic commands）</a>
+                                        </h1>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- end .post-topheader -->
+
+                <div class="visible-lg">
+                    <div class="side-widget">
+                        <div class="stream__item-zan btn btn-default mt0 mb15 ml0 mr0 pt0 pb0 pl0 pr0 " id="side-widget-votes-btn">
+                            <span class="stream__item-zan-icon"></span>
+                            <span class="stream__item-zan-number" id="side-widget-votes-num">0</span>
+                        </div>
+
+                        <i class="fa fa-bookmark item " id="side-widget-bookmarks-btn"></i>
+                        <i class="fa fa-weibo item"></i>
+                        <i class="fa fa-weixin item" data-toggle="popover" data-placement="right" data-original-title="" title=""></i>
+                        <i class="fa fa-twitter item"></i>
+                        <i class="fa fa-facebook item"></i>
+                        <i class="fa fa-arrow-up item hidden"></i>
+                    </div>
+                </div>
+
+
+                <div class="article fmt article__content" data-id="1190000010758722" data-license="cc">
+
+<h2 id="articleHeader0">常用命令</h2>
+<p>自动重新加载更改的模块</p>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="%load_ext autoreload
+%autoreload 2" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs haml"><code><span class="hljs-tag">%<span class="hljs-selector-tag">load_ext</span></span> autoreload
+<span class="hljs-tag">%<span class="hljs-selector-tag">autoreload</span></span> 2</code></pre>
+<p>启动和当前笔记本相同内核的 qtconsole：</p>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="%qtconsole" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs haml"><code style="word-break: break-word; white-space: initial;"><span class="hljs-tag">%<span class="hljs-selector-tag">qtconsole</span></span></code></pre>
+<p>当前笔记本链接信息：</p>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="%connect_info" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs haml"><code style="word-break: break-word; white-space: initial;"><span class="hljs-tag">%<span class="hljs-selector-tag">connect_info</span></span></code></pre>
+<h2 id="articleHeader1">Line magics</h2>
+<table>
+<thead><tr>
+<th>命令</th>
+<th>详情</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>%alias</code></td>
+<td>定义别名</td>
+</tr>
+<tr>
+<td><code>%alias_magic</code></td>
+<td>为现有的魔术命令创建别名</td>
+</tr>
+<tr><td colspan="2"><code>%autocall</code></td></tr>
+<tr>
+<td><code>%automagic</code></td>
+<td>设置输入魔术命令时是否键入<code>%</code>前缀，<code>on(1)/off(0)</code>
+</td>
+</tr>
+<tr>
+<td><code>%bookmark</code></td>
+<td>管理IPython的书签系统</td>
+</tr>
+<tr>
+<td><code>%cd</code></td>
+<td>更改当前工作目录</td>
+</tr>
+<tr><td colspan="2"><code>%colors</code></td></tr>
+<tr><td colspan="2"><code>%config</code></td></tr>
+<tr><td colspan="2"><code>%debug</code></td></tr>
+<tr>
+<td><code>%dhist</code></td>
+<td>打印历史访问目录</td>
+</tr>
+<tr>
+<td><code>%dirs</code></td>
+<td>返回当前目录堆栈</td>
+</tr>
+<tr><td colspan="2"><code>%doctest_mode</code></td></tr>
+<tr><td colspan="2"><code>%edit</code></td></tr>
+<tr>
+<td><code>%env</code></td>
+<td>设置环境变量(无需重启)</td>
+</tr>
+<tr><td colspan="2"><code>%gui</code></td></tr>
+<tr><td colspan="2"><code>%history</code></td></tr>
+<tr><td colspan="2"><code>%killbgscripts</code></td></tr>
+<tr>
+<td><code>%load</code></td>
+<td>导入python文件</td>
+</tr>
+<tr><td colspan="2"><code>%load_ext</code></td></tr>
+<tr>
+<td><code>%loadpy</code></td>
+<td>
+<code>%load</code>别名</td>
+</tr>
+<tr>
+<td><code>%logoff</code></td>
+<td>临时停止logging</td>
+</tr>
+<tr>
+<td><code>%logon</code></td>
+<td>重新开始logging</td>
+</tr>
+<tr><td colspan="2"><code>%logstart</code></td></tr>
+<tr><td colspan="2"><code>%logstate</code></td></tr>
+<tr>
+<td><code>%lsmagic</code></td>
+<td>列出当前可用的魔术命令。</td>
+</tr>
+<tr>
+<td><code>%macro</code></td>
+<td>定义用来重复执行的宏</td>
+</tr>
+<tr>
+<td><code>%magic</code></td>
+<td>显示魔术命令的帮助</td>
+</tr>
+<tr>
+<td><code>%matplotlib</code></td>
+<td>设置matplotlib的工作方式</td>
+</tr>
+<tr><td colspan="2"><code>%notebook</code></td></tr>
+<tr><td colspan="2"><code>%page</code></td></tr>
+<tr><td colspan="2"><code>%pastebin</code></td></tr>
+<tr>
+<td><code>%pdb</code></td>
+<td>控制pdb交互式调试器的自动调用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="articleHeader2">打印相关</h3>
+<table>
+<thead><tr>
+<th>命令</th>
+<th>详情</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>%pdef</code></td>
+<td>打印任何可调用对象信息</td>
+</tr>
+<tr>
+<td><code>%pdoc</code></td>
+<td>打印对象的<code>docstring</code>
+</td>
+</tr>
+<tr><td colspan="2"><code>%pfile</code></td></tr>
+<tr><td colspan="2"><code>%pinfo</code></td></tr>
+<tr><td colspan="2"><code>%pinfo2</code></td></tr>
+<tr>
+<td><code>%pip</code></td>
+<td>运行<code>pip</code>命令</td>
+</tr>
+<tr><td colspan="2"><code>%popd</code></td></tr>
+<tr>
+<td><code>%pprint</code></td>
+<td>美化打印</td>
+</tr>
+<tr>
+<td><code>%precision</code></td>
+<td>设置美化打印时的浮点数精度</td>
+</tr>
+<tr>
+<td><code>%profile</code></td>
+<td>打印您当前活动的IPython配置文件</td>
+</tr>
+<tr>
+<td><code>%prun</code></td>
+<td>告诉你程序中每个函数消耗的时间</td>
+</tr>
+<tr><td colspan="2"><code>%psearch</code></td></tr>
+<tr>
+<td><code>%psource</code></td>
+<td>打印对象源代码</td>
+</tr>
+<tr><td colspan="2"><code>%pushd</code></td></tr>
+<tr>
+<td><code>%pwd</code></td>
+<td>返回当前工作路径</td>
+</tr>
+<tr><td colspan="2"><code>%pycat</code></td></tr>
+<tr>
+<td><code>%pylab</code></td>
+<td>加载numpy、matplotlib</td>
+</tr>
+<tr><td colspan="2"><code>%quickref</code></td></tr>
+<tr><td colspan="2"><code>%recall</code></td></tr>
+<tr><td colspan="2"><code>%rehashx</code></td></tr>
+</tbody>
+</table>
+<h3 id="articleHeader3">运行相关</h3>
+<table>
+<thead><tr>
+<th>命令</th>
+<th>详情</th>
+</tr></thead>
+<tbody>
+<tr>
+<td><code>%reload_ext</code></td>
+<td>通过其模块名称重新加载IPython扩展</td>
+</tr>
+<tr><td colspan="2"><code>%rerun</code></td></tr>
+<tr><td colspan="2"><code>%reset</code></td></tr>
+<tr><td colspan="2"><code>%reset_selective</code></td></tr>
+<tr><td colspan="2"><code>%run</code></td></tr>
+<tr><td colspan="2"><code>%save</code></td></tr>
+<tr><td colspan="2"><code>%sc</code></td></tr>
+<tr>
+<td><code>%set_env</code></td>
+<td>设置环境变量</td>
+</tr>
+<tr><td colspan="2"><code>%sx</code></td></tr>
+<tr><td colspan="2"><code>%system</code></td></tr>
+<tr><td colspan="2"><code>%tb</code></td></tr>
+<tr>
+<td><code>%time</code></td>
+<td>执行Python语句或表达式的时间</td>
+</tr>
+<tr><td colspan="2"><code>%timeit</code></td></tr>
+<tr>
+<td><code>%unalias</code></td>
+<td>移别名</td>
+</tr>
+<tr>
+<td><code>%unload_ext</code></td>
+<td>通过其模块名称卸载IPython扩展</td>
+</tr>
+<tr>
+<td><code>%who</code></td>
+<td>列出全局变量</td>
+</tr>
+<tr>
+<td><code>%who_ls</code></td>
+<td>以排序列表的方式列出变量</td>
+</tr>
+<tr>
+<td><code>%whos</code></td>
+<td>类似<code>who</code>，但给出的信息更详细</td>
+</tr>
+<tr><td colspan="2"><code>%xdel</code></td></tr>
+<tr><td colspan="2"><code>%xmode</code></td></tr>
+</tbody>
+</table>
+<h3 id="articleHeader4">详情</h3>
+<h4><code>%autocall</code></h4>
+<h4><code>%automagic</code></h4>
+<h4><code>%bookmark</code></h4>
+<h4><code>%cd</code></h4>
+<h4><code>%colors</code></h4>
+<h4><code>%env</code></h4>
+<h4><code>%history</code></h4>
+<h4><code>%load</code></h4>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="%load myscript.py
+%load 7-27
+%load myMacro
+%load http://www.example.com/myscript.py
+%load -r 5-10 myscript.py
+%load -r 10-20,30,40: foo.py
+%load -s MyClass,wonder_function myscript.py
+%load -n MyClass" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs haml"><code><span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> myscript.py
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> 7-27
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> myMacro
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> http://www.example.com/myscript.py
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> -r 5-10 myscript.py
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> -r 10-20,30,40: foo.py
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> -s MyClass,wonder_function myscript.py
+<span class="hljs-tag">%<span class="hljs-selector-tag">load</span></span> -n MyClass</code></pre>
+<h4><code>%alias</code></h4>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [2]: alias bracket echo &quot;Input in brackets: <%l>&quot;
+In [3]: bracket hello world
+Input in brackets: <hello world>" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs armasm"><code><span class="hljs-symbol">In</span> [<span class="hljs-number">2</span>]: <span class="hljs-meta">alias</span> <span class="hljs-keyword">bracket </span>echo <span class="hljs-string">"Input in brackets: &lt;%l&gt;"</span>
+<span class="hljs-symbol">In</span> [<span class="hljs-number">3</span>]: <span class="hljs-keyword">bracket </span>hello world
+<span class="hljs-symbol">Input</span> in <span class="hljs-keyword">brackets: </span>&lt;hello world&gt;</code></pre>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [1]: alias parts echo first %s second %s
+In [2]: %parts A B
+first A second B
+In [3]: %parts A
+Incorrect number of arguments: 2 expected.
+parts is an alias to: 'echo first %s second %s'" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs maxima"><code>In [<span class="hljs-number">1</span>]: <span class="hljs-built_in">alias</span> parts echo <span class="hljs-built_in">first</span> <span class="hljs-built_in">%s</span> <span class="hljs-built_in">second</span> <span class="hljs-built_in">%s</span>
+In [<span class="hljs-number">2</span>]: %parts A B
+<span class="hljs-built_in">first</span> A <span class="hljs-built_in">second</span> B
+In [<span class="hljs-number">3</span>]: %parts A
+Incorrect number of arguments: <span class="hljs-number">2</span> expected.
+parts <span class="hljs-built_in">is</span> an <span class="hljs-built_in">alias</span> to: 'echo <span class="hljs-built_in">first</span> <span class="hljs-built_in">%s</span> <span class="hljs-built_in">second</span> <span class="hljs-built_in">%s</span>'</code></pre>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [6]: alias show echo
+In [7]: PATH='A Python string'
+In [8]: show $PATH
+A Python string
+In [9]: show $$PATH
+/usr/local/lf9560/bin:/usr/local/intel/compiler70/ia32/bin:..." title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs sql"><code>In [6]: alias <span class="hljs-keyword">show</span> echo
+<span class="hljs-keyword">In</span> [<span class="hljs-number">7</span>]: <span class="hljs-keyword">PATH</span>=<span class="hljs-string">'A Python string'</span>
+<span class="hljs-keyword">In</span> [<span class="hljs-number">8</span>]: <span class="hljs-keyword">show</span> $<span class="hljs-keyword">PATH</span>
+A Python <span class="hljs-keyword">string</span>
+<span class="hljs-keyword">In</span> [<span class="hljs-number">9</span>]: <span class="hljs-keyword">show</span> $$<span class="hljs-keyword">PATH</span>
+/usr/<span class="hljs-keyword">local</span>/lf9560/<span class="hljs-keyword">bin</span>:/usr/<span class="hljs-keyword">local</span>/intel/compiler70/ia32/<span class="hljs-keyword">bin</span>:...</code></pre>
+<h4>
+<code>%who</code>、<code>%who_ls</code>、<code>%whos</code>
+</h4>
+<p>限制返回的变量类型为函数和字符串：</p>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="%who function str" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs ada"><code style="word-break: break-word; white-space: initial;">%who <span class="hljs-keyword">function</span> <span class="hljs-title">str</span></code></pre>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [1]: alpha = 123
+
+In [2]: beta = 'test'
+
+In [3]: %who
+alpha   beta
+
+In [4]: %who int
+alpha
+
+In [5]: %who str
+beta" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs prolog"><code><span class="hljs-symbol">In</span> [<span class="hljs-number">1</span>]: alpha = <span class="hljs-number">123</span>
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">2</span>]: beta = <span class="hljs-string">'test'</span>
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">3</span>]: <span class="hljs-comment">%who</span>
+alpha   beta
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">4</span>]: <span class="hljs-comment">%who int</span>
+alpha
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">5</span>]: <span class="hljs-comment">%who str</span>
+beta</code></pre>
+<div class="widget-codetool" style="display: none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [1]: alpha = 123
+
+In [2]: beta = 'test'
+
+In [3]: %who_ls
+Out[3]: ['alpha', 'beta']
+
+In [4]: %who_ls int
+Out[4]: ['alpha']
+
+In [5]: %who_ls str
+Out[5]: ['beta']" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs prolog"><code><span class="hljs-symbol">In</span> [<span class="hljs-number">1</span>]: alpha = <span class="hljs-number">123</span>
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">2</span>]: beta = <span class="hljs-string">'test'</span>
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">3</span>]: <span class="hljs-comment">%who_ls</span>
+<span class="hljs-symbol">Out</span>[<span class="hljs-number">3</span>]: [<span class="hljs-string">'alpha'</span>, <span class="hljs-string">'beta'</span>]
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">4</span>]: <span class="hljs-comment">%who_ls int</span>
+<span class="hljs-symbol">Out</span>[<span class="hljs-number">4</span>]: [<span class="hljs-string">'alpha'</span>]
+
+<span class="hljs-symbol">In</span> [<span class="hljs-number">5</span>]: <span class="hljs-comment">%who_ls str</span>
+<span class="hljs-symbol">Out</span>[<span class="hljs-number">5</span>]: [<span class="hljs-string">'beta'</span>]</code></pre>
+<div class="widget-codetool" style="display:none;">
+      <div class="widget-codetool--inner">
+      <span class="selectCode code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="全选"></span>
+      <span type="button" class="copyCode code-tool" data-toggle="tooltip" data-placement="top" data-clipboard-text="In [1]: alpha = 123
+
+In [2]: beta = 'test'
+
+In [3]: %whos
+Variable   Type        Data/Info
+
+alpha      int         123
+beta       str         test" title="" data-original-title="复制"></span>
+      <span type="button" class="saveToNote code-tool" data-toggle="tooltip" data-placement="top" title="" data-original-title="放进笔记"></span>
+      </div>
+      </div><pre class="hljs stata"><code><span class="hljs-keyword">In</span> [1]: <span class="hljs-keyword">alpha</span> = 123
+
+<span class="hljs-keyword">In</span> [2]: beta = '<span class="hljs-keyword">test</span>'
+
+<span class="hljs-keyword">In</span> [3]: %whos
+Variable   <span class="hljs-keyword">Type</span>        Data/Info
+
+<span class="hljs-keyword">alpha</span>      int         123
+beta       str         <span class="hljs-keyword">test</span></code></pre>
+<h2 id="articleHeader5">Cell magics</h2>
+<p>在 notebook 内用不同的内核运行代码</p>
+<table>
+<thead><tr>
+<th>命令</th>
+<th>详情</th>
+</tr></thead>
+<tbody>
+<tr><td colspan="2"><code>%%bash</code></td></tr>
+<tr><td colspan="2"><code>%%capture</code></td></tr>
+<tr><td colspan="2"><code>%%html</code></td></tr>
+<tr><td colspan="2"><code>%%javascript</code></td></tr>
+<tr><td colspan="2"><code>%%js</code></td></tr>
+<tr><td colspan="2"><code>%%latex</code></td></tr>
+<tr><td colspan="2"><code>%%markdown</code></td></tr>
+<tr><td colspan="2"><code>%%perl</code></td></tr>
+<tr><td colspan="2"><code>%%pypy</code></td></tr>
+<tr><td colspan="2"><code>%%python</code></td></tr>
+<tr><td colspan="2"><code>%%python2</code></td></tr>
+<tr><td colspan="2"><code>%%python3</code></td></tr>
+<tr><td colspan="2"><code>%%ruby</code></td></tr>
+<tr><td colspan="2"><code>%%sh</code></td></tr>
+<tr><td colspan="2"><code>%%svg</code></td></tr>
+<tr><td colspan="2"><code>%%writefile</code></td></tr>
+</tbody>
+</table>
+<p>参见：<a href="http://ipython.readthedocs.io/en/stable/interactive/magics.html" rel="nofollow noreferrer" target="_blank">官方文档</a></p>
+
+              
