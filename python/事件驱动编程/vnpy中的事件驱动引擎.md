@@ -110,9 +110,7 @@ while 1:
 如当标的物行情发生变化时，期权高频套利算法需要执行以下操作：
 
 - 使用定价引擎先计算新的期权理论价、希腊值
--
 - 使用风控引擎对当前持仓的风险度汇总，并计算报价的中间价
--
 - 使用套利引擎基于预先设定的价差、下单手数等参数，计算具体价格并发单
 
 以上三步操作，只需在交易系统启动时按顺序注册监听到标的物行情事件上，就可以保证操作顺序的正确。
@@ -147,15 +145,15 @@ class Event:
 
 #### 事件处理线程的连续运行
 
-事件引擎的事件处理线程__thread中执行连续运行工作的函数为__run：当事件引擎的开关__active没有被关闭时，引擎尝试从事件队列中读取最新的事件，若读取成功则立即调用__process函数处理该事件，若无法读取（队列为空）则进入阻塞状态节省CPU资源，当阻塞时间（默认为1秒）结束时再次进入以上循环。
+事件引擎的事件处理线程`__thread`中执行连续运行工作的函数为`__run`：当事件引擎的开关`__active`没有被关闭时，引擎尝试从事件队列中读取最新的事件，若读取成功则立即调用`__process`函数处理该事件，若无法读取（队列为空）则进入阻塞状态节省CPU资源，当阻塞时间（默认为1秒）结束时再次进入以上循环。
 
 `__process`函数工作时，首先检查事件对象的事件类型在__handlers字典中是否存在，若存在（说明有事件处理函数在监听该事件）则按照注册顺序调用监听函数列表中的事件处理函数进行相关操作。
 
-计时器
+#### 计时器
 
-事件引擎中的`__timer`是一个PyQt中的QTimer对象，提供的功能非常简单：每隔一段时间（由用户设定）自动运行函数`__onTimer`。`__onTimer`函数会创建一个类型为`EVENT_TIMER`（在eventType.py文件中定义）的事件对象，并调用引擎的put方法存入到事件队列中。
+事件引擎中的`__timer`是一个PyQt中的**QTimer对象**，提供的功能非常简单：每隔一段时间（由用户设定）自动运行函数`__onTimer`。`__onTimer`函数会创建一个类型为`EVENT_TIMER`（在eventType.py文件中定义）的事件对象，并调用引擎的`put`方法存入到事件队列中。
 
-敏感的读者可能已经意识到了，这个计时器本质上是一个由时间驱动的功能。尽管我们在前文中提到了事件驱动在量化交易平台开发中的重要性，但不可否认某些交易功能的实现必须基于时间驱动，例如：下单后若2秒不成交则立即撤单、每隔5分钟将当日的成交记录保存到数据库中等。这类功能在实现时就可以选择使用事件处理函数对EVENT_TIMER类型的计时器事件进行监听（参考下一章节“事件驱动引擎使用”中的示例）。
+敏感的读者可能已经意识到了，**这个计时器本质上是一个由时间驱动的功能**。尽管我们在前文中提到了事件驱动在量化交易平台开发中的重要性，但不可否认某些交易功能的实现必须基于时间驱动，例如：下单后若2秒不成交则立即撤单、每隔5分钟将当日的成交记录保存到数据库中等。这类功能在实现时就可以选择使用事件处理函数对`EVENT_TIMER`类型的计时器事件进行监听（参考下一章节“事件驱动引擎使用”中的示例）。
 
 #### 启动、停止
 
@@ -206,6 +204,7 @@ test函数整体上包含了这几步：
 
 整体上看，当用户开发自己的程序时，需要修改的只是第2步和第5步：创建自己的事件处理函数并将这些函数注册到相应的事件类型上进行监听。
 
+---
 ## 具体代码分析
 
 在弄清楚这个模块的基本作用后，我们来仔细研究一下整个模块的代码：
@@ -260,31 +259,23 @@ class EventEngine:
         ...
 
     """
-
     #----------------------------------------------------------------------
     def __init__(self):
         """初始化事件引擎"""
-        # 事件队列
-        self.__queue = Queue()
-
-        # 事件引擎开关
-        self.__active = False
-
-        # 事件处理线程
-        self.__thread = Thread(target = self.__run)
-
-        # 计时器，用于触发计时器事件
-        self.__timer = QTimer()
+        # 初始化的时候，代码也是按顺序执行的
+        self.__queue = Queue()# 事件队列
+        self.__active = False  # 事件引擎开关
+        self.__thread = Thread(target = self.__run)# 事件处理线程    
+        self.__timer = QTimer()# 计时器，用于触发计时器事件
         self.__timer.timeout.connect(self.__onTimer)
-
         # 这里的__handlers是一个字典，用来保存对应的事件调用关系
         # 其中每个键对应的值是一个列表，列表中保存了对该事件进行监听的函数功能
         self.__handlers = {}
-
     #----------------------------------------------------------------------
     def __run(self):
         """引擎运行"""
         while self.__active == True:
+          # 先尝试获取事件，若没有事件就抛出empty错误，然后就pass掉！
             try:
                 event = self.__queue.get(block = True, timeout = 1)  # 获取事件的阻塞时间设为1秒
                 self.__process(event)
@@ -297,30 +288,27 @@ class EventEngine:
         # 检查是否存在对该事件进行监听的处理函数
         if event.type_ in self.__handlers:
             # 若存在，则按顺序将事件传递给处理函数执行
+            # self.__handlers[event.type_]本身按顺序有一个列表，以控制执行顺序
             [handler(event) for handler in self.__handlers[event.type_]]
 
             # 以上语句为Python列表解析方式的写法，对应的常规循环写法为：
             #for handler in self.__handlers[event.type_]:
                 #handler(event)
+            # 两种方法并没有什么区别
 
     #----------------------------------------------------------------------
     def __onTimer(self):
         """向事件队列中存入计时器事件"""
-        # 创建计时器事件
-        event = Event(type_=EVENT_TIMER)
-
-        # 向队列中存入计时器事件
-        self.put(event)
+        event = Event(type_=EVENT_TIMER)# 创建计时器事件
+        self.put(event)# 向队列中存入计时器事件
 
     #----------------------------------------------------------------------
     def start(self):
         """引擎启动"""
         # 将引擎设为启动
         self.__active = True
-
         # 启动事件处理线程
         self.__thread.start()
-
         # 启动计时器，计时器事件间隔默认设定为1秒
         self.__timer.start(1000)
 
@@ -345,8 +333,7 @@ class EventEngine:
         except KeyError:
             handlerList = []
             self.__handlers[type_] = handlerList
-
-        # 若要注册的处理器不在该事件的处理器列表中，则注册该事件
+        # 先创建一个空列表如上，若要注册的处理器不在该事件的处理器列表中，则注册该事件
         if handler not in handlerList:
             handlerList.append(handler)
 
@@ -356,11 +343,9 @@ class EventEngine:
         # 尝试获取该事件类型对应的处理函数列表，若无则忽略该次注销请求
         try:
             handlerList = self.handlers[type_]
-
             # 如果该函数存在于列表中，则移除
             if handler in handlerList:
                 handlerList.remove(handler)
-
             # 如果函数列表为空，则从引擎中移除该事件类型
             if not handlerList:
                 del self.handlers[type_]
