@@ -373,3 +373,18 @@ res = user_collection.update({"name":"xujunhao"},{"$set":{"name":"mike"}})
 res = user_collection.remove({"name":"xujunhao"})
 print(res)
 ```
+
+---
+
+## 做个简单的总结：
+
+- 数据库的操作：
+  - 创建 `use database_name`
+  - 删除 `database_name.drop()`
+  - 查询 `show database_name`
+- 集合的操作
+  - _在 MongoDB 中，你不需要创建集合。当你插入一些文档时，MongoDB 会自动创建集合。_
+  - 创建集合 `db.createCollection(name, options)``
+  - 删除集合 `db.collection.drop()`
+  - 查询集合 `show collections`
+  - 插入文档 `db.COLLECTION_NAME.insert(document)`
