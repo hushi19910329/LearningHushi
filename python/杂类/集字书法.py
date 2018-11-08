@@ -2,7 +2,7 @@
 """
 Created on Thu Nov  8 13:45:16 2018
 
-@author: Administrator
+@author: hushi
 """
 
 '''
@@ -91,4 +91,3 @@ if __name__ == '__main__':
         ii+=1
 
     print(err_list)
-    
